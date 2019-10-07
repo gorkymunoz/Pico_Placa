@@ -9,5 +9,14 @@
         android:id="@+id/consultarFragment"
         android:name="com.gorkymunoz.picoplaca.ConsultarFragment"
         android:label="fragment_consultar"
-        tools:layout="@layout/fragment_consultar" />
+        tools:layout="@layout/fragment_consultar" >
+        <action
+            android:id="@+id/action_consultarFragment_to_historialFragment"
+            app:destination="@id/historialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historialFragment"
+        android:name="com.gorkymunoz.picoplaca.HistorialFragment"
+        android:label="fragment_historial"
+        tools:layout="@layout/fragment_historial" />
 </navigation>
