@@ -3,4 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo_consultar">Check out if you can drive your car at this moment</string>
+    <string name="pico_placa">Pico y Placa</string>
 </resources>
