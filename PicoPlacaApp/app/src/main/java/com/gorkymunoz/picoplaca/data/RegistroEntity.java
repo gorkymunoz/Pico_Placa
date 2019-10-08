@@ -1,7 +1,5 @@
 package com.gorkymunoz.picoplaca.data;
 
-import java.util.Date;
-
 public class RegistroEntity {
     private String matricula;
     private String fechaRegistro;

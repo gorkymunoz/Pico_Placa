@@ -59,7 +59,7 @@ public class ConsultarFragment extends Fragment {
     }
 
     private void consultarPicoPlaca(String matricula, Calendar calendar) {
-        if(validarMatricula(matricula)){
+        if(!validarMatricula(matricula)){
             return;
         }
         guardarRegistro(calendar.getTime(),matricula);

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.HistorialViewHolder> {
 
-    private ArrayList<RegistroEntity> listaRegistros = new ArrayList<>();
+    private ArrayList<RegistroEntity> listaRegistros;
 
     public HistorialAdapter(ArrayList<RegistroEntity> listaRegistros) {
         this.listaRegistros = listaRegistros;
@@ -33,14 +33,16 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
 
         RegistroEntity registroActual = listaRegistros.get(position);
         holder.matricula.setText(registroActual.getMatricula());
-        holder.matricula.setText(registroActual.getMatricula());
+        holder.fechaRegistro.setText(registroActual.getFechaRegistro());
         String contravencion = "";
         if (registroActual.getContravencion() == 0) {
-            Resources.getSystem().getString(R.string.estado_contravencion, "No");
+            //contravencion = Resources.getSystem().getString(R.string.estado_contravencion, "No");
+            contravencion = "Contravención: No";
         } else {
-            Resources.getSystem().getString(R.string.estado_contravencion, "Si");
+            //contravencion = Resources.getSystem().getString(R.string.estado_contravencion, "Si");
+            contravencion = "Contravención: Si";
         }
-        holder.matricula.setText(contravencion);
+        holder.contravencion.setText(contravencion);
     }
 
     @Override
