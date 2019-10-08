@@ -32,15 +32,20 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
     public void onBindViewHolder(@NonNull HistorialViewHolder holder, int position) {
 
         RegistroEntity registroActual = listaRegistros.get(position);
-        holder.matricula.setText(registroActual.getMatricula());
+        /*String matriculaMostrar = Resources.getSystem()
+                .getString(
+                        R.string.matricula,
+                        registroActual.getMatricula());*/
+        String matriculaMostrar = "Matricula: "+registroActual.getMatricula();
+        holder.matricula.setText(matriculaMostrar);
         holder.fechaRegistro.setText(registroActual.getFechaRegistro());
-        String contravencion = "";
+        String contravencion;
         if (registroActual.getContravencion() == 0) {
-            //contravencion = Resources.getSystem().getString(R.string.estado_contravencion, "No");
             contravencion = "Contravención: No";
+            //contravencion = Resources.getSystem().getString(R.string.estado_contravencion, "No");
         } else {
-            //contravencion = Resources.getSystem().getString(R.string.estado_contravencion, "Si");
             contravencion = "Contravención: Si";
+            //contravencion = Resources.getSystem().getString(R.string.estado_contravencion, "Si");
         }
         holder.contravencion.setText(contravencion);
     }
@@ -59,6 +64,10 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
             matricula = itemView.findViewById(R.id.matricula);
             fechaRegistro = itemView.findViewById(R.id.fecha_registro);
             contravencion = itemView.findViewById(R.id.contravencion);
+        }
+
+        public void formatoFecha(String fechaRegistro){
+
         }
     }
 

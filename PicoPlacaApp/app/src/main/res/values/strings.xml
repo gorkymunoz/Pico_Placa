@@ -7,5 +7,6 @@
     <string name="pico_placa">Pico y Placa</string>
     <string name="obligatorio">Obligatorio</string>
     <string name="formato_incorrecto">Debe ingresar con formato XXX1111</string>
-    <string name="estado_contravencion">Contravención: %s</string>
+    <string name="estado_contravencion">Contravención: %1$s</string>
+    <string name="matricula">Matricula: %1$s</string>
 </resources>
