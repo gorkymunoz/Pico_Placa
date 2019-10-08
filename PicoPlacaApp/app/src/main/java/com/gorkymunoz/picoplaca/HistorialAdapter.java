@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gorkymunoz.picoplaca.data.RegistroEntity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.HistorialViewHolder> {
 
@@ -64,10 +68,6 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
             matricula = itemView.findViewById(R.id.matricula);
             fechaRegistro = itemView.findViewById(R.id.fecha_registro);
             contravencion = itemView.findViewById(R.id.contravencion);
-        }
-
-        public void formatoFecha(String fechaRegistro){
-
         }
     }
 

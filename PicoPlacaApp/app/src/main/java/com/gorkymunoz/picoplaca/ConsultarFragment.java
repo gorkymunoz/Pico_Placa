@@ -18,8 +18,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.gorkymunoz.picoplaca.data.RegistroDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +33,7 @@ import java.util.regex.Pattern;
 public class ConsultarFragment extends Fragment {
 
     private TextInputLayout layoutMatricula;
+    private TextView matriculaIngresada;
 
     public ConsultarFragment() {}
 
@@ -39,7 +43,7 @@ public class ConsultarFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_consultar, container, false);
         layoutMatricula = view.findViewById(R.id.layout_placa_ingresada);
-        final TextView matriculaIngresada = view.findViewById(R.id.placa_ingresada);
+        matriculaIngresada = view.findViewById(R.id.placa_ingresada);
         FloatingActionButton fabHistorial = view.findViewById(R.id.fab_historial);
         Button botonConsultar = view.findViewById(R.id.material_unelevated_button);
         botonConsultar.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +101,15 @@ public class ConsultarFragment extends Fragment {
             contravencion = 1;
         }
         crearDialogo(contravencion);
-        RegistroDatabase.ingresarRegistro(matricula,fechaActual.toString(),contravencion);
+        RegistroDatabase.ingresarRegistro(matricula,formatoFecha(fechaActual),contravencion);
+        matriculaIngresada.setText("");
+    }
+
+    private String formatoFecha(Date fechaActual){
+
+        String pattern = "MM-dd-yyyy:HH:mm:SS";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern,Locale.US);
+        return simpleDateFormat.format(fechaActual);
     }
 
     private void crearDialogo(int contravencion){
