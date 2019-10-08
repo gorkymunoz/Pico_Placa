@@ -97,7 +97,7 @@ public class ConsultarFragment extends Fragment {
 
     private void guardarRegistro(Date fechaActual, String matricula){
         int contravencion = 0;
-        int ultimoDigito = matricula.charAt(matricula.length()-1);
+        int ultimoDigito = Integer.parseInt(matricula.substring(matricula.length() - 1));
         if(dentroPicoPlaca(fechaActual,ultimoDigito)){
             contravencion = 1;
         }
