@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/consultarFragment">
+
+    <fragment
+        android:id="@+id/consultarFragment"
+        android:name="com.gorkymunoz.picoplaca.ConsultarFragment"
+        android:label="fragment_consultar"
+        tools:layout="@layout/fragment_consultar" >
+        <action
+            android:id="@+id/action_consultarFragment_to_historialFragment"
+            app:destination="@id/historialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historialFragment"
+        android:name="com.gorkymunoz.picoplaca.HistorialFragment"
+        android:label="fragment_historial"
+        tools:layout="@layout/fragment_historial" />
+</navigation>

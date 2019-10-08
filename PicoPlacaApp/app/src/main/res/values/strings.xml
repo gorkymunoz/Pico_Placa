@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Pico placa</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo_consultar">Ingrese la matrícula a consultar</string>
+    <string name="pico_placa">Pico y Placa</string>
+    <string name="obligatorio">Obligatorio</string>
+    <string name="formato_incorrecto">Debe ingresar con formato XXX1111</string>
+    <string name="estado_contravencion">Contravención: %1$s</string>
+    <string name="matricula">Matricula: %1$s</string>
 </resources>
