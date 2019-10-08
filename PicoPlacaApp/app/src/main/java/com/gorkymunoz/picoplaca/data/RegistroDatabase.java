@@ -1,24 +1,23 @@
 package com.gorkymunoz.picoplaca.data;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
+
+import static com.gorkymunoz.picoplaca.MainActivity.database;
 
 public class RegistroDatabase {
 
-    private final Context context;
-    public static SQLiteDatabase database;
 
-    public RegistroDatabase(Context context) {
-        this.context = context;
-    }
-
-    public void insert(String matricula, String fechaRegistro, int contravencion){
+    public static void ingresarRegistro(String matricula, String fechaRegistro, int contravencion){
         ContentValues valoresPorIngresar = new ContentValues();
         valoresPorIngresar.put("matricula",matricula);
         valoresPorIngresar.put("fecha_registro",fechaRegistro);
         valoresPorIngresar.put("contravencion",contravencion);
 
         database.insert("registro",null,valoresPorIngresar);
+    }
+
+    public static Cursor consultarRegistros(){
+        return database.rawQuery("SELECT * FROM registro order by id",null);
     }
 }

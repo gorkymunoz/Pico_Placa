@@ -14,10 +14,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    private String registro = "CREATE TABLE registro(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, matricula TEXT, fecha_registro TEXT, contravencion INTEGER)";
-
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String registro = "CREATE TABLE registro(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "matricula TEXT, " +
+                "fecha_registro TEXT, " +
+                "contravencion INTEGER)";
         db.execSQL(registro);
     }
 

@@ -1,9 +1,7 @@
 package com.gorkymunoz.picoplaca;
 
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,16 +16,12 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.gorkymunoz.picoplaca.data.RegistroDatabase;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.gorkymunoz.picoplaca.MainActivity.database;
 
 
 /**
@@ -37,9 +31,7 @@ public class ConsultarFragment extends Fragment {
 
     private TextInputLayout layoutMatricula;
 
-    public ConsultarFragment() {
-        // Required empty public constructor
-    }
+    public ConsultarFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,14 +92,12 @@ public class ConsultarFragment extends Fragment {
     }
 
     private void guardarRegistro(Date fechaActual, String matricula){
-        String insert;
         int contravencion = 0;
         if(dentroPicoPlaca(fechaActual)){
             contravencion = 1;
         }
-        insert = "INSERT INTO registro(matricula,fecha_registro,contravencion) values("+matricula+","+fechaActual+","+contravencion+")";
         crearDialogo(contravencion);
-        database.execSQL(insert);
+        RegistroDatabase.ingresarRegistro(matricula,fechaActual.toString(),contravencion);
     }
 
     private void crearDialogo(int contravencion){
