@@ -97,7 +97,8 @@ public class ConsultarFragment extends Fragment {
 
     private void guardarRegistro(Date fechaActual, String matricula){
         int contravencion = 0;
-        if(dentroPicoPlaca(fechaActual)){
+        int ultimoDigito = Integer.parseInt(matricula.substring(matricula.length() - 1));
+        if(dentroPicoPlaca(fechaActual,ultimoDigito)){
             contravencion = 1;
         }
         crearDialogo(contravencion);
@@ -124,8 +125,34 @@ public class ConsultarFragment extends Fragment {
                 .show();
     }
 
-    private boolean dentroPicoPlaca(Date horaConsulta){
+    private boolean dentroPicoPlaca(Date horaConsulta, int ultimoDigito){
         Calendar calendar = Calendar.getInstance();
+
+        boolean dentroDeDia = false;
+
+        switch (calendar.get(Calendar.DAY_OF_WEEK)){
+            case Calendar.MONDAY:
+                if (ultimoDigito == 1 || ultimoDigito == 2){
+                    dentroDeDia = true;
+                }
+            case Calendar.TUESDAY:
+                if (ultimoDigito == 3 || ultimoDigito == 4){
+                    dentroDeDia = true;
+                }
+            case Calendar.WEDNESDAY:
+                if (ultimoDigito == 5 || ultimoDigito == 6){
+                    dentroDeDia = true;
+                }
+            case Calendar.THURSDAY:
+                if (ultimoDigito == 7 || ultimoDigito == 8){
+                    dentroDeDia = true;
+                }
+            case Calendar.FRIDAY:
+                if (ultimoDigito == 9 || ultimoDigito == 0){
+                    dentroDeDia = true;
+                }
+        }
+
         Date horaInicio, horaFin;
         if (calendar.get(Calendar.HOUR_OF_DAY)<=12){
             calendar.set(Calendar.HOUR_OF_DAY,7);
@@ -144,6 +171,6 @@ public class ConsultarFragment extends Fragment {
             calendar.set(Calendar.MINUTE,30);
             horaFin= calendar.getTime();
         }
-        return horaConsulta.before(horaFin) && horaConsulta.after(horaInicio);
+        return horaConsulta.before(horaFin) && horaConsulta.after(horaInicio) && dentroDeDia;
     }
 }
