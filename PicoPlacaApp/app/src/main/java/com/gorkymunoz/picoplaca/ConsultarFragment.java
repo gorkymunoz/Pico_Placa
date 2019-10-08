@@ -1,6 +1,8 @@
 package com.gorkymunoz.picoplaca;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -17,9 +19,15 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.gorkymunoz.picoplaca.MainActivity.database;
 
 
 /**
@@ -29,11 +37,9 @@ public class ConsultarFragment extends Fragment {
 
     private TextInputLayout layoutMatricula;
 
-
     public ConsultarFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +70,7 @@ public class ConsultarFragment extends Fragment {
         if(validarMatricula(matricula)){
             return;
         }
-        calendar.getTime();
+        guardarRegistro(calendar.getTime(),matricula);
     }
 
     private void navegarHistorial(View view){
@@ -93,5 +99,49 @@ public class ConsultarFragment extends Fragment {
         return encaja.matches();
     }
 
+    private void guardarRegistro(Date fechaActual, String matricula){
+        String insert;
+        int contravencion = 0;
+        if(dentroPicoPlaca(fechaActual)){
+            contravencion = 1;
+        }
+        insert = "INSERT INTO registro(matricula,fecha_registro,contravencion) values("+matricula+","+fechaActual+","+contravencion+")";
+        crearDialogo(contravencion);
+        database.execSQL(insert);
+    }
 
+    private void crearDialogo(int contravencion){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if(contravencion==0){
+            builder.setMessage("Puede circular con normalidad");
+        }else{
+            builder.setMessage("No puede circular en este momento");
+        }
+        builder.setTitle("Resultado de registro")
+                .create()
+                .show();
+    }
+
+    private boolean dentroPicoPlaca(Date horaConsulta){
+        Calendar calendar = Calendar.getInstance();
+        Date horaInicio, horaFin;
+        if (calendar.get(Calendar.HOUR_OF_DAY)<=12){
+            calendar.set(Calendar.HOUR_OF_DAY,7);
+            calendar.set(Calendar.MINUTE,0);
+            horaInicio = calendar.getTime();
+
+            calendar.set(Calendar.HOUR_OF_DAY,9);
+            calendar.set(Calendar.MINUTE,30);
+            horaFin = calendar.getTime();
+        }else{
+            calendar.set(Calendar.HOUR_OF_DAY,16);
+            calendar.set(Calendar.MINUTE,0);
+            horaInicio= calendar.getTime();
+
+            calendar.set(Calendar.HOUR_OF_DAY,19);
+            calendar.set(Calendar.MINUTE,30);
+            horaFin= calendar.getTime();
+        }
+        return horaConsulta.before(horaFin) && horaConsulta.after(horaInicio);
+    }
 }
